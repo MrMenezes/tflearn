@@ -1,3 +1,4 @@
+import numpy as np
 import os
 import tflearn
 from tflearn.layers.conv import conv_2d, max_pool_2d
@@ -5,7 +6,7 @@ from tflearn.layers.core import input_data, dropout, fully_connected
 from tflearn.layers.estimator import regression
 import tflearn.datasets.mnist as mnist
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
+# os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 
 X, Y, test_x, test_y, = mnist.load_data(one_hot=True)
 
@@ -27,10 +28,15 @@ convnet = fully_connected(convnet, 10, activation='softmax')
 convnet = regression(convnet, optimizer='adam', learning_rate=0.01,
                      loss='categorical_crossentropy', name='targets')
 
+# model = tflearn.DNN(convnet)
+
+# model.fit({'input': X}, {'targets': Y},
+#           n_epoch=10, validation_set=({'input': test_x}, {'targets': test_y}),
+#           snapshot_step=500, show_metric=True, run_id='mnist')
+
+# model.save('tflearncnn.model')
+
 model = tflearn.DNN(convnet)
-
-model.fit({'input': X}, {'targets': Y},
-          n_epoch=10, validation_set=({'input': test_x}, {'targets': test_y}),
-          snapshot_step=500, show_metric=True, run_id='mnist')
-
-model.save('tflearncnn.model')
+model.load('tflearncnn2.model')
+print(np.round(model.predict([test_x[1]])[0]))
+print(test_y[1])

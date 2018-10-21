@@ -1,0 +1,2 @@
+model_checkpoint_path: "/home/mrmenezes/Projetos/tflearn/tflearncnn.model"
+all_model_checkpoint_paths: "/home/mrmenezes/Projetos/tflearn/tflearncnn.model"
