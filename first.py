@@ -37,6 +37,6 @@ convnet = regression(convnet, optimizer='adam', learning_rate=0.01,
 # model.save('tflearncnn.model')
 
 model = tflearn.DNN(convnet)
-model.load('tflearncnn2.model')
+model.load('tflearncnn.model')
 print(np.round(model.predict([test_x[1]])[0]))
 print(test_y[1])
